@@ -1,52 +1,66 @@
-class FilaCircular{
+// Fila circular
+
+class FilaCircular {
+    // # == private
     #inicio;
     #fim;
     #qtd;
-    #elementos;
+    #elementos; //vetor 
 
-    constructor(tamanho=10){
+    constructor (tamanho=10) {
         this.#inicio = 0;
         this.#fim = -1;
         this.#qtd = 0;
-        this.#elementos = new Array(tamanho);
-    } // fim do constructor
+        this.#elementos = new Array (tamanho);
+    }
 
-    isFull(){
-        return this.#qtd === 
-                this.#elementos.length;
-    } // fim do isFull
+    // Métodos
+    isFull() {
+    return this.#qtd === this.#elementos.length;        
+    }
 
-    isEmpty(){
-        return this.#qtd === 0; /* verifica se 
-        a quantidade de elementos é igual a 0*/
-    } // fim do isEmpty
+    isEmpty() {
+        return this.#qtd === 0;
+    }
 
-    enqueue(dado){
-        if(!this.isFull()){
-               this.#fim = (this.#fim + 1) % this.#elementos.length;
-               this.#elementos[this.#fim] = dado;
-               this.#qtd++;
-               return true;
-        } // fim do if
-        return false; // se estiver cheio
-    } // fim do inserir
-
-    dequeue(){
-        if(!this.isEmpty()){
-            const dado = this.#elementos[this.#inicio];
-            this.#inicio = (this.#inicio + 1) % this.#elementos.length;
-            this.#qtd--;
-            return dado;
+    enqueue(dado) {
+        if(!this.isFull()) {
+            if (this.#fim === this.#elementos.length -1) { //caso o vetor esteja cheio
+                this.#fim === 0;
+            } else {
+                this.#fim++;
+                this.#elementos[this.#fim] = dado;
+                this.#qtd++;
+                return true;
+            }
         }
-        return null;
+        return false; // A fila está cheia
     }
 
-    toString(){
-        let filaString = "";
-        for(let i = 0;i < this.#qtd;i++){ // percorre do inicio até o fim
-            filaString += this.#elementos[(this.#inicio + i) % this.#elementos.length] + " | "; // acessa os elementos da fila
-        } // fim do for
-        return filaString; // mostrando a fila
+    dequeue () {
+        if (!this.isEmpty()) {
+            if (this.#inicio === this.#elementos.length) {
+                this.#inicio === 0;
+            } else {
+                const dado = this.#elementos[this.#inicio];
+                this.#inicio++;
+                this.#qtd--;
+                return dado;
+            }
+        }
+        else {
+            return null; // fila vazia
+        }
     }
 
-}
+    // toString deve ser criado em todas as classes que recebem dados
+    toString () {
+        let filaString = " ";
+        for (let i = this.#inicio; i <= this.#fim; i++) {
+            filaString += this.#elementos[i] + " | ";
+        }
+        console.log(filaString);
+        return filaString;
+    }
+
+}// fim classe
