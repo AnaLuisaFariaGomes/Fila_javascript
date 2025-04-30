@@ -23,51 +23,56 @@ class FilaCircular {
         return this.#qtd === 0;
     }
 
-    enqueue(dado) {
-        if(!this.isFull()) {
-            if (this.#fim === this.#elementos.length -1) { //caso o vetor esteja cheio
-                this.#fim === 0;
-            } else {
+    enqueue(dado){
+        if(!this.isFull()){
+            if(this.#fim === this.#elementos.length-1)
+                this.#fim = 0;
+            else    
                 this.#fim++;
-                this.#elementos[this.#fim] = dado;
-                this.#qtd++;
-                return true;
-            }
-        }
-        return false; // A fila está cheia
+            this.#elementos[this.#fim] = dado;
+            this.#qtd++;
+          console.log("Ini:"+this.#inicio+ 
+                 " Fim:"+this.#fim + " Qtd:"+ this.#qtd);
+            return true;
+        }// fim if
+        else
+            return false; // se estiver cheio
     }
 
-    dequeue () {
-        if (!this.isEmpty()) {
-            if (this.#inicio === this.#elementos.length) {
-                this.#inicio === 0;
-            } else {
-                const dado = this.#elementos[this.#inicio];
-                this.#inicio++;
-                this.#qtd--;
-                return dado;
-            }
-        }
-        else {
-            return null; // fila vazia
-        }
+    dequeue(){
+        if(!this.isEmpty()){
+            const dado = 
+                 this.#elementos[this.#inicio];
+            if(this.#inicio === this.#elementos.length-1)
+                this.#inicio=0;
+            else
+                 this.#inicio++;
+            this.#qtd--;
+          console.log("Ini:"+this.#inicio+ 
+                 " Fim:"+this.#fim + " Qtd:"+ this.#qtd);
+            return dado;
+        }// fim if
+        else
+            return null; // se estiver vazio 
     }
 
     // VAI CAIR NA PROVA!!! ESTUDAR COMO E PQ FUNCIONA
     // toString deve ser criado em todas as classes que recebem dados
-    toString () {
-        let filaString = " ";
+    toString(){
+        let filaString = "";
         let pos = this.#inicio;
-        for (let i = 0; i < this.#qtd; i++) {
-            filaString += this.#elementos[i] + " | ";
-            if (pos === this.#elementos.length -1) {
-                pos = 0;
-            } else {
+        for(let i=0; i<this.#qtd;i++){
+            filaString += this.#elementos[pos] +" |";
+            if(pos === this.#elementos.length-1)
+                pos=0;
+            else
                 pos++;
-            }
-        }
+        }// fim for
         console.log(filaString);
         return filaString;
     }
+
+    // FAZER ITERATOR!!! O iterator possibilita percorrer o vetor posição por posição
+    // Symbol.iterator deve ser criado em todas as classes que recebem dados
 
 }// fim classe
