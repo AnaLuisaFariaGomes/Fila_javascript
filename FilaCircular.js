@@ -53,11 +53,18 @@ class FilaCircular {
         }
     }
 
+    // VAI CAIR NA PROVA!!! ESTUDAR COMO E PQ FUNCIONA
     // toString deve ser criado em todas as classes que recebem dados
     toString () {
         let filaString = " ";
-        for (let i = this.#inicio; i <= this.#fim; i++) {
+        let pos = this.#inicio;
+        for (let i = 0; i < this.#qtd; i++) {
             filaString += this.#elementos[i] + " | ";
+            if (pos === this.#elementos.length -1) {
+                pos = 0;
+            } else {
+                pos++;
+            }
         }
         console.log(filaString);
         return filaString;
